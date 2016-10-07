@@ -1,0 +1,27 @@
+{{#item-listing paginationProps=paginationProps }}
+  {{#if hasRecords}}
+    <table class="table">
+      <tr class="table-header">
+        <th>{{t 'labels.dateRequested'}}</th>
+        <th>{{t 'labels.patient'}}</th>
+        <th>{{t 'labels.requestedBy'}}</th>
+        <th>{{t 'labs.labels.labType'}}</th>
+        <th>{{t 'labels.notes'}}</th>
+        {{#if showActions}}
+          <th>{{t 'labels.actions'}}</th>
+        {{/if}}
+      </tr>
+      {{#each model as |lab|}}
+        {{labs/index/labs-list-item
+          lab=lab
+          action='editItem'
+          showActions=showActions
+          canEdit=canEdit}}
+      {{/each}}
+    </table>
+  {{else}}
+    <div class="alert alert-info">
+      <p>{{t 'labs.messages.noItemsFound'}} {{#if canAdd}}<a href="#" {{action 'newItem'}}>{{t 'labs.messages.createNewRecord'}}</a>{{/if}}</p>
+    </div>
+  {{/if}}
+{{/item-listing}}
